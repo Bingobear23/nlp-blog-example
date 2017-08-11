@@ -26,7 +26,7 @@ public class AdvancedProcessorTest {
                 new Word("bird", "bird", "NN"));
 
         expected.get(0).increaseOccurrence();
-        final List<Word> result = advancedProcessor.processTextWithLemmatizer("run ran bird .","en");
+        final List<Word> result = advancedProcessor.processText("run ran bird .","en");
 
         assertEquals(expected, result);
     }

@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 import static de.codencetric.blog.nlp.textprocessor.processor.NLPConst.*;
 
 @Component
-public class AdvancedProcessor {
+public class AdvancedProcessor implements Processor {
 
     private String language = "en";
 
@@ -24,14 +24,17 @@ public class AdvancedProcessor {
         this.lemmatizer = lemmatizer;
     }
 
-    public List<Word> processTextWithLemmatizer(String text, String language) {
+    @Override
+    public List<Word> processText(String text, String language) {
         this.language = language;
-        final List<Word> uniqueWords = createUniqueWordsWithLemmatisation(text);
+        final List<Word> uniqueWords = extractDistinctWords(text);
 
         return filterWordTypes(uniqueWords);
+
     }
 
-    private List<Word> createUniqueWordsWithLemmatisation(String text) {
+    @Override
+    public List<Word> extractDistinctWords(String text) {
         final String[] tokenArray = SimpleTokenizer.INSTANCE.tokenize(text);
         final String[] postTags = retrievePostTags(tokenArray);
         final String[] basicWords = lemmatizer.lemmatize(tokenArray, postTags);
@@ -47,6 +50,7 @@ public class AdvancedProcessor {
             }
         }
         return words;
+
     }
 
     private List<Word> filterWordTypes(List<Word> wordList) {
@@ -67,6 +71,5 @@ public class AdvancedProcessor {
         }
         throw new IllegalArgumentException();
     }
-
 }
 

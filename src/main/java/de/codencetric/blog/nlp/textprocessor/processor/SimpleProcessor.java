@@ -7,11 +7,9 @@ import opennlp.tools.tokenize.SimpleTokenizer;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static de.codencetric.blog.nlp.textprocessor.processor.NLPConst.ENGLISH;
-import static de.codencetric.blog.nlp.textprocessor.processor.NLPConst.GERMAN;
-import static de.codencetric.blog.nlp.textprocessor.processor.NLPConst.WORD_TYPES;
+import static de.codencetric.blog.nlp.textprocessor.processor.NLPConst.*;
 
-public class SimpleProcessor {
+public class SimpleProcessor implements Processor{
 
     private String language = "en";
     private final WordStemmer wordStemmer;
@@ -20,14 +18,14 @@ public class SimpleProcessor {
         this.wordStemmer = wordStemmer;
     }
 
-    public List<Word> processTextWithStemming(String text, String language) {
+    public List<Word> processText(String text, String language) {
         this.language = language;
         final List<Word> uniqueWords = createUniqueWordsWithStemming(text);
 
         return filterWordTypes(uniqueWords);
     }
 
-    private List<Word> createWords(String text) {
+    public List<Word> extractDistinctWords(String text) {
         final String[] tokenArray = SimpleTokenizer.INSTANCE.tokenize(text);
         final String[] postTags = retrievePostTags(tokenArray);
         final List<String> wordStems = retrieveWordStems(tokenArray);
@@ -41,7 +39,7 @@ public class SimpleProcessor {
     }
 
     private Map<String, List<Word>> groupWordsByStem(String text) {
-        return filterWordTypes(createWords(text)).stream()
+        return filterWordTypes(extractDistinctWords(text)).stream()
                 .collect(Collectors.groupingBy(Word::getBasic));
     }
 

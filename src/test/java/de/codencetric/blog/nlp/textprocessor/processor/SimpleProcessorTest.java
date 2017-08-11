@@ -29,7 +29,7 @@ public class SimpleProcessorTest {
                 new Word("ran", "ran", "VBD"),
                 new Word("bird", "bird", "NN"));
 
-        final List<Word> result = simpleProcessor.processTextWithStemming("run ran bird .","en");
+        final List<Word> result = simpleProcessor.processText("run ran bird .","en");
 
         assertEquals(expected, result);
     }
@@ -42,7 +42,7 @@ public class SimpleProcessorTest {
 
         expected.get(0).increaseOccurrence();
 
-        final List<Word> result = simpleProcessor.processTextWithStemming("springt springt Vogel und .","de");
+        final List<Word> result = simpleProcessor.processText("springt springt Vogel und .","de");
         assertEquals(expected, result);
     }
 }

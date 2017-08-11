@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Tokenizer {
 
-    public List<String> tokenizeText(String text, String language) {
+    public List<String> tokenizeText(String text) {
         return Arrays.asList(SimpleTokenizer.INSTANCE.tokenize(text));
     }
 
