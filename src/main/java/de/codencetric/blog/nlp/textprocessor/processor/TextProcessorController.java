@@ -2,6 +2,7 @@ package de.codencetric.blog.nlp.textprocessor.processor;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,17 +27,17 @@ public class TextProcessorController {
         this.tokenizer = tokenizer;
     }
 
-    @GetMapping("/processTextBasic")
+    @PostMapping("/processTextBasic")
     public ResponseEntity<List<String>> extractWords(@RequestBody  String text) {
         return ResponseEntity.ok(tokenizer.tokenizeText(text));
     }
 
-    @GetMapping("/processTextSimple")
+    @PostMapping("/processTextSimple")
     public ResponseEntity<List<Word>> extractRelevantWordsStem(@RequestBody String text) {
         return ResponseEntity.ok(processText(text, false));
     }
 
-    @GetMapping("/processTextAdvanced")
+    @PostMapping("/processTextAdvanced")
     public ResponseEntity<List<Word>> extractRelevantWordsLem(@RequestBody String text) {
         return ResponseEntity.ok(processText(text, true));
     }

@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -43,7 +43,7 @@ public class TextProcessorControllerIT {
     @Test
     public void should_return_tokenized_processed_text() throws Exception {
         final String request = "{text: Please process my too long text}";
-        mvc.perform(get("/processTextBasic")
+        mvc.perform(post("/processTextBasic")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(request))
                 .andExpect(status().isOk());
@@ -52,7 +52,7 @@ public class TextProcessorControllerIT {
     @Test
     public void should_return_simple_processed_text() throws Exception {
         final String request = "{text: Please process my too long text}";
-        mvc.perform(get("/processTextSimple")
+        mvc.perform(post("/processTextSimple")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(request))
                 .andExpect(status().isOk());
@@ -61,7 +61,7 @@ public class TextProcessorControllerIT {
     @Test
     public void should_return_advanced_processed_text() throws Exception {
         final String request = "{text: Please process my too long text}";
-        mvc.perform(get("/processTextAdvanced")
+        mvc.perform(post("/processTextAdvanced")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(request))
                 .andExpect(status().isOk());
