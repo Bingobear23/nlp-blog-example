@@ -19,7 +19,7 @@ import java.util.List;
 public class LanguageDetectionService {
     private final LanguageDetector languageDetector;
 
-    public LanguageDetectionService(){
+    public LanguageDetectionService() {
         //load all languages:
         List<LanguageProfile> languageProfiles;
         try {
@@ -34,7 +34,7 @@ public class LanguageDetectionService {
                 .build();
     }
 
-    LdLocale detect(String parsedText) throws IOException {
+    LdLocale detect(String parsedText) {
 
         //create a text object factory
         TextObjectFactory textObjectFactory = CommonTextObjectFactories.forDetectingOnLargeText();

@@ -3,13 +3,15 @@ package de.codencetric.blog.nlp.textprocessor.processor;
 import de.codencetric.blog.nlp.textprocessor.processor.postTagger.EnglishPosTagger;
 import de.codencetric.blog.nlp.textprocessor.processor.postTagger.GermanPosTagger;
 import opennlp.tools.tokenize.SimpleTokenizer;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static de.codencetric.blog.nlp.textprocessor.processor.NLPConst.*;
 
-public class SimpleProcessor implements Processor{
+@Component
+public class SimpleProcessor implements Processor {
 
     private String language = "en";
     private final WordStemmer wordStemmer;
